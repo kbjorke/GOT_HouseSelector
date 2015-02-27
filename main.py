@@ -1,4 +1,7 @@
+#!/usr/bin/env python
+
 # By: Kristian Bjoerke
+__version__ = '1.0'
 
 from random import shuffle
 
