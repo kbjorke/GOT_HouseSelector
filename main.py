@@ -5,6 +5,30 @@ __version__ = '1.0'
 
 from random import shuffle
 
+from kivy.app import App
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.button import Button
+# kivy.require('1.8.0')
+ 
+
+class InitialScreen(AnchorLayout):
+
+    def __init__(self, **kwargs):
+        super(InitialScreen, self).__init__(**kwargs)
+
+        button = Button(
+                text='Hello world', 
+                size_hint=(.5, .25), 
+                pos=(20, 20))
+
+        
+
+class GOT_HouseSelector(App):
+
+    def build(self):
+        return InitialScreen()
+
+"""
 houses = ['House Stark',
         'House Lannister',
         'House Baratheon',
@@ -48,8 +72,10 @@ for i in range(number_of_players):
     print '%- 16s: %s' % (houses[i], player_names[i])
 
 print ''
+"""
 
 
 
 
-
+if __name__ == '__main__':
+    GOT_HouseSelector().run()
