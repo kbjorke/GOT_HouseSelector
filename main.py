@@ -7,8 +7,8 @@ from random import shuffle
 
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.label import Label
-from kivy.uix.button import Button
+#from kivy.uix.label import Label
+#from kivy.uix.button import Button
 
 
 class InitialScreen(FloatLayout):
@@ -16,6 +16,7 @@ class InitialScreen(FloatLayout):
     def __init__(self, **kwargs):
         super(InitialScreen, self).__init__(**kwargs)
 
+        """
         self.header_text = Label(
                 text='A Game Of Thrones The Board Game \n House Selector',
                 size_hint=(0, 0), 
@@ -28,6 +29,7 @@ class InitialScreen(FloatLayout):
 
         self.add_widget(self.header_text)
         self.add_widget(self.start_button)
+        """
 
         
 
