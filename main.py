@@ -6,22 +6,27 @@ __version__ = '1.0'
 from random import shuffle
 
 from kivy.app import App
-from kivy.uix.floatlayout import FloatLayout
-#from kivy.uix.label import Label
-#from kivy.uix.button import Button
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 
-class InitialScreen(FloatLayout):
+class InitialScreen(Screen):
 
-    def __init__(self, **kwargs):
-        super(InitialScreen, self).__init__(**kwargs)
-        
+    pass
+
+
+class SetupScreen(Screen):
+
+    pass
+
+
+class MyScreenManager(ScreenManager):
+
+    pass
+
 
 class GOT_HouseSelector(App):
-
-    def build(self):
-
-        return InitialScreen()
+    
+    pass
 
 """
 houses = ['House Stark',

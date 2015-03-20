@@ -1,6 +1,11 @@
 #:kivy 1.0
 
+ScreenManager:
+    InitialScreen:
+    SetupScreen:
+
 <InitialScreen>:
+    name: 'initial'
 
     FloatLayout:
 
@@ -15,4 +20,16 @@
             text: 'Start'
             size_hint: 0.2, 0.1
             pos_hint: {'x': 0.4, 'y': 0.2}
+            on_press: root.manager.current = 'setup'
     
+<SetupScreen>:
+    name: 'setup'
+
+    FloatLayout:
+
+        Label:
+            id: header
+            text: 'Choose number of players:'
+            size_hint: 0, 0
+            pos_hint: {'x': 0.4, 'y': 0.8}
+
