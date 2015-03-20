@@ -15,22 +15,6 @@ class InitialScreen(FloatLayout):
 
     def __init__(self, **kwargs):
         super(InitialScreen, self).__init__(**kwargs)
-
-        """
-        self.header_text = Label(
-                text='A Game Of Thrones The Board Game \n House Selector',
-                size_hint=(0, 0), 
-                pos_hint={'x':0.4, 'y':0.8})
-
-        self.start_button = Button(
-                text='Start', 
-                size_hint=(0.2, 0.1), 
-                pos_hint={'x':0.4, 'y':0.2})
-
-        self.add_widget(self.header_text)
-        self.add_widget(self.start_button)
-        """
-
         
 
 class GOT_HouseSelector(App):
