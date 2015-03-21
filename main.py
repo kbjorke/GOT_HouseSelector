@@ -7,19 +7,27 @@ from random import shuffle
 
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import StringProperty
 
+
+class MyScreenManager(ScreenManager):
+
+    pass
 
 class InitialScreen(Screen):
 
     pass
 
-
 class SetupScreen(Screen):
 
-    pass
+    number_of_players = StringProperty('')
 
+    def _set_player_number(self, n_players):
+        
+        self.number_of_players = n_players
+        self.manager.current = 'players'
 
-class MyScreenManager(ScreenManager):
+class PlayersScreen(Screen):
 
     pass
 
