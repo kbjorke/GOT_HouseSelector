@@ -28,6 +28,7 @@ class SetupScreen(Screen):
         self.manager.current = 'players'
 
 class PlayersScreen(Screen):
+    # Screen IDs should be set in this script, not the .kv script
 
     pass
 
