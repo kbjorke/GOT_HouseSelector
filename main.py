@@ -7,35 +7,27 @@ from random import shuffle
 
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, BooleanProperty
 
 
-class MyScreenManager(ScreenManager):
+class GOT_HouseSelectorScreen(ScreenManager):
+    fullscreen = BooleanProperty(False)
 
-    pass
+    def add_widget(selfm *args):
+        if 'content' in self.ids: 
 
-class InitialScreen(Screen):
 
-    pass
 
-class SetupScreen(Screen):
+class GOT_HouseSelectorApp(App):
 
     number_of_players = StringProperty('')
 
     def _set_player_number(self, n_players):
         
-        self.number_of_players = n_players
+        self.manager.number_of_players = n_players
         self.manager.current = 'players'
 
-class PlayersScreen(Screen):
-    # Screen IDs should be set in this script, not the .kv script
-
-    pass
-
-
-class GOT_HouseSelector(App):
     
-    pass
 
 """
 houses = ['House Stark',
