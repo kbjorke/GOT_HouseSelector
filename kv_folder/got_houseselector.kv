@@ -1,0 +1,76 @@
+#:kivy 1.0
+
+ScreenManager:
+    InitialScreen:
+    SetupScreen:
+    PlayersScreen:
+
+<InitialScreen>:
+    name: 'initial'
+
+    FloatLayout:
+
+        Label:
+            id: header
+            text: 'A Game Of Thrones The Board Game \n House Selector'
+            size_hint: 0, 0
+            pos_hint: {'x': 0.4, 'y': 0.8}
+
+        Button:
+            id: start_button
+            text: 'Start'
+            size_hint: 0.2, 0.1
+            pos_hint: {'x': 0.4, 'y': 0.2}
+            on_press: root.manager.current = 'setup'
+    
+<SetupScreen>:
+    name: 'setup'
+
+    FloatLayout:
+
+        Label:
+            id: header
+            text: 'Choose number of players:'
+            size_hint: 0, 0
+            pos_hint: {'x': 0.4, 'y': 0.8}
+        
+        Button:
+            id: three_players
+            text: '3 Players'
+            size_hint: 0.2, 0.1
+            pos_hint: {'x': 0.2, 'y': 0.4}
+            on_press: root._set_player_number('3')
+
+        Button:
+            id: four_players
+            text: '4 Players'
+            size_hint: 0.2, 0.1
+            pos_hint: {'x': 0.2, 'y': 0.2}
+            on_press: root._set_player_number('4')
+
+        Button:
+            id: five_players
+            text: '5 Players'
+            size_hint: 0.2, 0.1
+            pos_hint: {'x': 0.6, 'y': 0.4}
+            on_press: root._set_player_number('5')
+
+        Button:
+            id: six_players
+            text: '6 Players'
+            size_hint: 0.2, 0.1
+            pos_hint: {'x': 0.6, 'y': 0.2}
+            on_press: root._set_player_number('6')
+
+<PlayersScreen>:
+    name: 'players'
+
+    FloatLayout:
+
+        Label:
+            id: header
+            text: 'Enter the names of players:'
+            size_hint: 0, 0
+            pos_hint: {'x': 0.4, 'y': 0.8}
+
+
