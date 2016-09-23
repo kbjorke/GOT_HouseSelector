@@ -3,8 +3,11 @@
 from kivy.app import App
 from kivy.base import runTouchApp
 from kivy.lang import Builder
-from kivy.properties import ListProperty
+from kivy.properties import ListProperty, NumericProperty
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
 
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 
@@ -17,6 +20,35 @@ class FirstScreen(Screen):
 class SecondScreen(Screen):
     pass
 
+class ThirdScreen(Screen):
+    b = BoxLayout(orientation='vertical')
+    number_of_players = NumericProperty()
+    houses = ListProperty(['House Stark',
+        'House Lannister',
+        'House Baratheon',
+        'House Greyjoy',
+        'House Tyrell',
+        'House Martel'])
+    player_names = ListProperty(['first',
+        'second',
+        'third',
+        'fourth',
+        'fifth',
+        'sixth'])
+
+    def add_player(self, i):
+        height = self.height
+        height_per_player = height/self.number_of_players
+
+        hb = BoxLayout(orientation='horizontal')
+        l = Label(text='Player '+str(i)+': ',
+                font_size=20)
+        t = TextInput(font_size=40)
+
+        hb.add_widget(l)
+        hb.add_widget(t)
+        self.b.add_widget(hb)
+
 class ColourScreen(Screen):
     colour = ListProperty([1, 0, 0, 1])
 
@@ -27,6 +59,28 @@ class MyScreenManager(ScreenManager):
                 colour=[random.random() for _ in range(3)] + [1])
         self.add_widget(s)
         self.current = name
+
+    def select_number_of_players(self, np):
+        name='player_screen'
+        s = ThirdScreen(name=name,
+                number_of_players=np)
+
+        header_label = Label(text='Number of players: '+str(np),
+                font_size=30)
+
+        s.b.add_widget(header_label)
+
+        for i in range(1, np+1):
+            s.add_player(i)
+
+        button = Button(text='Select houses', 
+                font_size=20)
+        s.b.add_widget(button)
+
+        s.add_widget(s.b)
+        self.add_widget(s)
+        self.current = name
+        
 
 
 root_widget = Builder.load_string('''
@@ -57,51 +111,28 @@ MyScreenManager:
     BoxLayout:
         orientation: 'vertical'
         Label:
-            text: 'Choose number of players'
+            text: 'Number of players?'
             font_size: 30
         BoxLayout:
             Button:
                 text: '3'
                 font_size: 30
-                on_release: app.root.current = 'first'
+                on_release: app.root.select_number_of_players(3)
             Button:
                 text: '5'
                 font_size: 30
-                on_release: app.root.new_colour_screen()
+                on_release: app.root.select_number_of_players(5)
         BoxLayout:
             Button:
                 text: '4'
                 font_size: 30
-                on_release: app.root.current = 'first'
+                on_release: app.root.select_number_of_players(4)
             Button:
                 text: '6'
                 font_size: 30
-                on_release: app.root.new_colour_screen()
-<ThirdScreen>:
-    name: 'second'
-    BoxLayout:
-        orientation: 'vertical'
-        Label:
-            text: 'Choose number of players'
-            font_size: 30
-        BoxLayout:
-            Button:
-                text: '3'
-                font_size: 30
-                on_release: app.root.current = 'first'
-            Button:
-                text: '5'
-                font_size: 30
-                on_release: app.root.new_colour_screen()
-        BoxLayout:
-            Button:
-                text: '4'
-                font_size: 30
-                on_release: app.root.current = 'first'
-            Button:
-                text: '6'
-                font_size: 30
-                on_release: app.root.new_colour_screen()
+                on_release: app.root.select_number_of_players(6)
+
+
 <ColourScreen>:
     BoxLayout:
         orientation: 'vertical'
