@@ -42,39 +42,64 @@ MyScreenManager:
     BoxLayout:
         orientation: 'vertical'
         Label:
-            text: 'first screen!'
+            text: 'Game of Thrones Board Game House Selector'
             font_size: 30
-        Image:
-            source: 'colours.png'
-            allow_stretch: True
-            keep_ratio: False
         BoxLayout:
             Button:
-                text: 'goto second screen'
+                text: 'Start'
                 font_size: 30
                 on_release: app.root.current = 'second'
             Button:
-                text: 'get random colour screen'
+                text: 'Info'
                 font_size: 30
-                on_release: app.root.new_colour_screen()
 <SecondScreen>:
     name: 'second'
     BoxLayout:
         orientation: 'vertical'
         Label:
-            text: 'second screen!'
+            text: 'Choose number of players'
             font_size: 30
-        Image:
-            source: 'colours2.png'
-            allow_stretch: True
-            keep_ratio: False
         BoxLayout:
             Button:
-                text: 'goto first screen'
+                text: '3'
                 font_size: 30
                 on_release: app.root.current = 'first'
             Button:
-                text: 'get random colour screen'
+                text: '5'
+                font_size: 30
+                on_release: app.root.new_colour_screen()
+        BoxLayout:
+            Button:
+                text: '4'
+                font_size: 30
+                on_release: app.root.current = 'first'
+            Button:
+                text: '6'
+                font_size: 30
+                on_release: app.root.new_colour_screen()
+<ThirdScreen>:
+    name: 'second'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Choose number of players'
+            font_size: 30
+        BoxLayout:
+            Button:
+                text: '3'
+                font_size: 30
+                on_release: app.root.current = 'first'
+            Button:
+                text: '5'
+                font_size: 30
+                on_release: app.root.new_colour_screen()
+        BoxLayout:
+            Button:
+                text: '4'
+                font_size: 30
+                on_release: app.root.current = 'first'
+            Button:
+                text: '6'
                 font_size: 30
                 on_release: app.root.new_colour_screen()
 <ColourScreen>:
