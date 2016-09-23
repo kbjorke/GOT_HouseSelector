@@ -43,11 +43,27 @@ class ThirdScreen(Screen):
         hb = BoxLayout(orientation='horizontal')
         l = Label(text='Player '+str(i)+': ',
                 font_size=20)
-        t = TextInput(font_size=40)
+        t = TextInput(id=str(i),
+                font_size=40)
+
+        t.bind(text=self.update_player)
 
         hb.add_widget(l)
         hb.add_widget(t)
         self.b.add_widget(hb)
+
+    def update_player(self, *args):
+        #print int(args[0].id)
+        self.player_names[int(args[0].id)-1] = args[0].text
+        
+    
+    def select_houses(self, *args):
+        print "hey"
+        print self.player_names
+
+class FourthScreen(Screen):
+    pass
+
 
 class ColourScreen(Screen):
     colour = ListProperty([1, 0, 0, 1])
@@ -65,7 +81,7 @@ class MyScreenManager(ScreenManager):
         s = ThirdScreen(name=name,
                 number_of_players=np)
 
-        header_label = Label(text='Number of players: '+str(np),
+        header_label = Label(text='Enter names of players:',
                 font_size=30)
 
         s.b.add_widget(header_label)
@@ -74,7 +90,8 @@ class MyScreenManager(ScreenManager):
             s.add_player(i)
 
         button = Button(text='Select houses', 
-                font_size=20)
+                font_size=20,
+                on_release=s.select_houses)
         s.b.add_widget(button)
 
         s.add_widget(s.b)
