@@ -21,7 +21,19 @@ class SecondScreen(Screen):
     pass
 
 class ThirdScreen(Screen):
+    pass
+        
+
+class FourthScreen(Screen):
+    pass
+
+
+class ColourScreen(Screen):
+    colour = ListProperty([1, 0, 0, 1])
+
+class MyScreenManager(ScreenManager):
     b = BoxLayout(orientation='vertical')
+    
     number_of_players = NumericProperty()
     houses = ListProperty(['House Stark',
         'House Lannister',
@@ -36,6 +48,35 @@ class ThirdScreen(Screen):
         'fifth',
         'sixth'])
 
+    def new_colour_screen(self):
+        name = str(time.time())
+        s = ColourScreen(name=name,
+                colour=[random.random() for _ in range(3)] + [1])
+        self.add_widget(s)
+        self.current = name
+
+    def select_number_of_players(self, np):
+        self.number_of_players = np
+        name='player_screen'
+        s = ThirdScreen(name=name)
+
+        header_label = Label(text='Enter names of players:',
+                font_size=30)
+
+        self.b.add_widget(header_label)
+
+        for i in range(1, np+1):
+            self.add_player(i)
+
+        button = Button(text='Select houses', 
+                font_size=20,
+                on_release=self.select_houses)
+        self.b.add_widget(button)
+
+        s.add_widget(self.b)
+        self.add_widget(s)
+        self.current = name
+    
     def add_player(self, i):
         height = self.height
         height_per_player = height/self.number_of_players
@@ -51,50 +92,15 @@ class ThirdScreen(Screen):
         hb.add_widget(l)
         hb.add_widget(t)
         self.b.add_widget(hb)
-
+    
     def update_player(self, *args):
         #print int(args[0].id)
         self.player_names[int(args[0].id)-1] = args[0].text
-        
-    
+
     def select_houses(self, *args):
-        print "hey"
-        print self.player_names
+        name='house_screen'
+        s = FourthScreen(name=name)
 
-class FourthScreen(Screen):
-    pass
-
-
-class ColourScreen(Screen):
-    colour = ListProperty([1, 0, 0, 1])
-
-class MyScreenManager(ScreenManager):
-    def new_colour_screen(self):
-        name = str(time.time())
-        s = ColourScreen(name=name,
-                colour=[random.random() for _ in range(3)] + [1])
-        self.add_widget(s)
-        self.current = name
-
-    def select_number_of_players(self, np):
-        name='player_screen'
-        s = ThirdScreen(name=name,
-                number_of_players=np)
-
-        header_label = Label(text='Enter names of players:',
-                font_size=30)
-
-        s.b.add_widget(header_label)
-
-        for i in range(1, np+1):
-            s.add_player(i)
-
-        button = Button(text='Select houses', 
-                font_size=20,
-                on_release=s.select_houses)
-        s.b.add_widget(button)
-
-        s.add_widget(s.b)
         self.add_widget(s)
         self.current = name
         
