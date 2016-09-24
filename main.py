@@ -27,12 +27,9 @@ class ThirdScreen(Screen):
 class FourthScreen(Screen):
     pass
 
-
-class ColourScreen(Screen):
-    colour = ListProperty([1, 0, 0, 1])
-
 class MyScreenManager(ScreenManager):
-    b = BoxLayout(orientation='vertical')
+    b1 = BoxLayout(orientation='vertical')
+    b2 = BoxLayout(orientation='vertical')
     
     number_of_players = NumericProperty()
     houses = ListProperty(['House Stark',
@@ -41,12 +38,13 @@ class MyScreenManager(ScreenManager):
         'House Greyjoy',
         'House Tyrell',
         'House Martel'])
-    player_names = ListProperty(['first',
+    names_list = ListProperty(['first',
         'second',
         'third',
         'fourth',
         'fifth',
         'sixth'])
+    player_names = ListProperty()
 
     def new_colour_screen(self):
         name = str(time.time())
@@ -57,13 +55,13 @@ class MyScreenManager(ScreenManager):
 
     def select_number_of_players(self, np):
         self.number_of_players = np
-        name='player_screen'
+        name = str(time.time())
         s = ThirdScreen(name=name)
 
         header_label = Label(text='Enter names of players:',
                 font_size=30)
 
-        self.b.add_widget(header_label)
+        self.b1.add_widget(header_label)
 
         for i in range(1, np+1):
             self.add_player(i)
@@ -71,9 +69,9 @@ class MyScreenManager(ScreenManager):
         button = Button(text='Select houses', 
                 font_size=20,
                 on_release=self.select_houses)
-        self.b.add_widget(button)
+        self.b1.add_widget(button)
 
-        s.add_widget(self.b)
+        s.add_widget(self.b1)
         self.add_widget(s)
         self.current = name
     
@@ -91,18 +89,45 @@ class MyScreenManager(ScreenManager):
 
         hb.add_widget(l)
         hb.add_widget(t)
-        self.b.add_widget(hb)
+        self.b1.add_widget(hb)
     
-    def update_player(self, *args):
-        #print int(args[0].id)
-        self.player_names[int(args[0].id)-1] = args[0].text
+    def update_player(self, textinput_instance, text):
+        self.names_list[int(textinput_instance.id)-1] = text
 
     def select_houses(self, *args):
-        name='house_screen'
+        self.player_names = self.names_list[0:self.number_of_players]
+        
+        name = str(time.time())
         s = FourthScreen(name=name)
 
+        random.shuffle(self.player_names)
+
+        for i in range(0, self.number_of_players):
+            self.house_player(i)
+
+        button = Button(text='Exit', 
+                font_size=20,
+                on_release=self.exit_selector)
+        self.b2.add_widget(button)
+
+        s.add_widget(self.b2) 
         self.add_widget(s)
         self.current = name
+
+    def house_player(self, i):
+        hb = BoxLayout(orientation='horizontal')
+        l = Label(text=self.houses[i]+': '+self.player_names[i],
+                font_size=40)
+        hb.add_widget(l)
+        self.b2.add_widget(hb)
+
+    def exit_selector(self, *args):
+        self.current='first'
+
+        self.b1 = BoxLayout(orientation='vertical')
+        self.b2 = BoxLayout(orientation='vertical')
+
+
         
 
 
@@ -154,31 +179,6 @@ MyScreenManager:
                 text: '6'
                 font_size: 30
                 on_release: app.root.select_number_of_players(6)
-
-
-<ColourScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        colour: random(), random(), random(), 1
-        Label:
-            text: 'colour {:.2},{:.2},{:.2} screen'.format(*root.colour[:3])
-            font_size: 30
-        Widget:
-            canvas:
-                Color:
-                    rgba: root.colour
-                Ellipse:
-                    pos: self.pos
-                    size: self.size
-        BoxLayout:
-            Button:
-                text: 'goto first screen'
-                font_size: 30
-                on_release: app.root.current = 'first'
-            Button:
-                text: 'get random colour screen'
-                font_size: 30
-                on_release: app.root.new_colour_screen()
 ''')
 
 class ScreenManagerApp(App):

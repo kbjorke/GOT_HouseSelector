@@ -95,13 +95,13 @@ for i in range(number_of_players):
     name = raw_input('Enter name of %s player: ' % player_names[i])
     player_names[i] = name
 
-player_names = player_names[0:number_of_players]
+player_names_cut = player_names[0:number_of_players]
 
-shuffle(player_names)
+shuffle(player_names_cut)
 
 print ''
 
 for i in range(number_of_players):
-    print '%- 16s: %s' % (houses[i], player_names[i])
+    print '%- 16s: %s' % (houses[i], player_names_cut[i])
 
 print ''
