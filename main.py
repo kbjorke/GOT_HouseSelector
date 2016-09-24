@@ -6,7 +6,6 @@
 __version__ = "0.9.1"
 
 from kivy.app import App
-from kivy.base import runTouchApp
 from kivy.lang import Builder
 from kivy.properties import ListProperty, NumericProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -28,7 +27,6 @@ class SecondScreen(Screen):
 class ThirdScreen(Screen):
     pass
         
-
 class FourthScreen(Screen):
     pass
 
@@ -50,13 +48,6 @@ class MyScreenManager(ScreenManager):
         'fifth',
         'sixth'])
     player_names = ListProperty()
-
-    def new_colour_screen(self):
-        name = str(time.time())
-        s = ColourScreen(name=name,
-                colour=[random.random() for _ in range(3)] + [1])
-        self.add_widget(s)
-        self.current = name
 
     def select_number_of_players(self, np):
         self.number_of_players = np
@@ -133,12 +124,8 @@ class MyScreenManager(ScreenManager):
         self.b2 = BoxLayout(orientation='vertical')
 
 
-        
-
-
 root_widget = Builder.load_string('''
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
-#:import random random.random
 MyScreenManager:
     transition: FadeTransition()
     FirstScreen:
