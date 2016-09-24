@@ -1,4 +1,9 @@
+#!/usr/bin/env python
+#
+# A Game of Thrones House Selector app
 # By: Kristian Bjoerke
+
+__version__ = "0.9.1"
 
 from kivy.app import App
 from kivy.base import runTouchApp

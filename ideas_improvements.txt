@@ -1,0 +1,7 @@
+Ideas and improvements for GoT House selector app:
+
+   - Make <enter> press exit textinput field
+   - Add different game versions
+   - Try landscape and standing (all) in buildozer
+   - Add info page
+   - Make nicer layout
