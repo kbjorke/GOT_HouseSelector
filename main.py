@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#
+
 # A Game of Thrones House Selector app
 # By: Kristian Bjoerke
 
@@ -19,6 +19,9 @@ import time
 import random
 
 class FirstScreen(Screen):
+    pass
+
+class InfoScreen(Screen):
     pass
 
 class SecondScreen(Screen):
@@ -79,7 +82,8 @@ class MyScreenManager(ScreenManager):
         l = Label(text='Player '+str(i)+': ',
                 font_size=20)
         t = TextInput(id=str(i),
-                font_size=40)
+                font_size=40,
+                multiline=False)
 
         t.bind(text=self.update_player)
 
@@ -129,6 +133,7 @@ root_widget = Builder.load_string('''
 MyScreenManager:
     transition: FadeTransition()
     FirstScreen:
+    InfoScreen:
     SecondScreen:
 
 <FirstScreen>:
@@ -139,6 +144,7 @@ MyScreenManager:
             text: 'Game of Thrones Board Game House Selector'
             font_size: 30
         BoxLayout:
+            size_hint_y: None
             Button:
                 text: 'Start'
                 font_size: 30
@@ -146,6 +152,22 @@ MyScreenManager:
             Button:
                 text: 'Info'
                 font_size: 30
+                on_release: app.root.current = 'info'
+
+<InfoScreen>:
+    name: 'info'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Info on Game of Thrones House Selector App. Author: Kristian Bjoerke'
+            font_size: 30
+        BoxLayout:
+            size_hint_y: None
+            Button:
+                text: 'Return'
+                font_size: 30
+                on_release: app.root.current = 'first'
+
 <SecondScreen>:
     name: 'second'
     BoxLayout:
